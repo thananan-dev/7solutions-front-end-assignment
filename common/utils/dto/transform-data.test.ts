@@ -13,19 +13,20 @@ describe("Unit test to function transformDataFromAPI", () => {
     EXAMPLE_DUMMY_JSON_API_DATA_MAIL,
     EXAMPLE_DUMMY_JSON_API_DATA_FEMAIL,
   ];
+  //NOTE: Not cover 100 coverage becuase mock data not enough but the function it work correctly
   test("add example data mail, the result should be correct object", () => {
     expect(transformDataFromAPI(exampleData)).toStrictEqual({
       Marketing: {
         male: 1,
         female: 0,
-        ageRange: "",
+        ageRange: "50-50",
         hair: { Black: 1, Blond: 0, Chestnut: 0, Brown: 0 },
         addressUser: { TerryMedhurst: "1745 T Street Southeast" },
       },
       Accounting: {
         male: 0,
         female: 1,
-        ageRange: "",
+        ageRange: "21-21",
         hair: { Black: 0, Blond: 1, Chestnut: 0, Brown: 0 },
         addressUser: { AlisonReichert: "18 Densmore Drive" },
       },
