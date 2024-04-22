@@ -5,8 +5,8 @@ I created this project follow to the instruction https://github.com/7-solutions/
 - ✅ Create data from API (OPTIONAL)
   
 ## Deploying
-https://7solutions-front-end-assignment.vercel.app/ - Auto Delete Todo List page
-https://7solutions-front-end-assignment.vercel.app/transform-data - Create data from API page
+- https://7solutions-front-end-assignment.vercel.app/ - Auto Delete Todo List page
+- https://7solutions-front-end-assignment.vercel.app/transform-data - Create data from API page
 
 ## Unit test result
 I created unit test for Create data from API util and attatched unit test result
