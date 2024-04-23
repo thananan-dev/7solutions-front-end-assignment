@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, memo, useEffect } from "react";
 
 interface ICard {
   children: ReactNode;
@@ -7,10 +7,13 @@ interface ICard {
 
 const Card = ({ children, onClick, ...props }: ICard) => {
   return (
-    <div className="border-2 p-2 hover:bg-slate-200 cursor-pointer" onClick={onClick}>
+    <div
+      className="border-2 p-2 hover:bg-slate-200 cursor-pointer"
+      onClick={onClick}
+    >
       <p className="text-center">{children}</p>
     </div>
   );
 };
 
-export default Card;
+export default memo(Card);

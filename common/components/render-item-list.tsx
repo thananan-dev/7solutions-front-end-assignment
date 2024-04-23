@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
+"use client";
+import React, { memo, useEffect, useMemo } from "react";
 import { EnumDataType, IExampleData } from "@/common/types/example-data.type";
 import Card from "@/common/components/card";
 
 interface IRenderItemList {
   items: IExampleData[];
   itemType: EnumDataType;
-  handlerPopItem: Function;
+  handlerPopItem: () => void;
 }
 
 const RenderItemList = ({
@@ -18,7 +19,7 @@ const RenderItemList = ({
   }, [itemType, items]);
 
   return (
-    <div className="border-2" onClick={() => handlerPopItem()}>
+    <div className="border-2" onClick={handlerPopItem}>
       <div className="bg-slate-200 p-3">
         <p className="text-center font-semibold">{itemType}</p>
       </div>
@@ -31,4 +32,4 @@ const RenderItemList = ({
   );
 };
 
-export default RenderItemList;
+export default memo(RenderItemList);
