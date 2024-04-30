@@ -1,4 +1,4 @@
-import React, { ReactNode, memo, useEffect } from "react";
+import React, { ReactNode, memo } from "react";
 
 interface ICard {
   children: ReactNode;
