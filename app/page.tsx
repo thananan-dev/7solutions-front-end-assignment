@@ -20,9 +20,7 @@ export default function Home() {
     setSelectedData((prev) => [...prev, item]);
 
     setTimeout(() => {
-      setSelectedData((prev) => {
-        return prev.slice(1);
-      });
+      setSelectedData((prev) => prev.filter(({ name }) => name !== item.name));
 
       setData((prev) => {
         // NOTE: handler this when user click on the right column, the set state will don't set duplicated item
