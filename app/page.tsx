@@ -19,9 +19,9 @@ export default function Home() {
     setData((prev) => [...prev, item]);
     setSelectedData((prev) => prev.filter(({ name }) => name !== item.name));
     setQue((prev) => {
-      const findPrev = prev.find(({ name }) => name === item.name);
-      if (findPrev) {
-        clearTimeout(findPrev.timer);
+      const findExistingQue = prev.find(({ name }) => name === item.name);
+      if (findExistingQue) {
+        clearTimeout(findExistingQue.timer);
       }
       return prev.filter(({ name }) => name !== item.name);
     });
@@ -30,25 +30,17 @@ export default function Home() {
   const handlerClickItem = useCallback((item: IExampleData) => {
     const timer = setTimeout(() => {
       setSelectedData((prev) => prev.filter(({ name }) => name !== item.name));
-      setData((prev) => {
-        // NOTE: handler this when user click on the right column, the set state will not set duplicated items.
-        const findExistingData = prev.find(({ name }) => name === item.name);
-        if (findExistingData) {
-          return prev;
-        }
-        return [...prev, item];
-      });
+      setData((prev) => [...prev, item]);
     }, 5000);
+
+    const addQue = {
+      name: item.name,
+      timer: timer,
+    };
 
     setData((prev) => prev.filter(({ name }) => name !== item.name));
     setSelectedData((prev) => [...prev, item]);
-    setQue((prev) => [
-      ...prev,
-      {
-        name: item.name,
-        timer: timer,
-      },
-    ]);
+    setQue((prev) => [...prev, addQue]);
   }, []);
 
   return (
