@@ -2,26 +2,34 @@
 import ItemList from "@/common/components/item-list";
 import RenderItemList from "@/common/components/render-item-list";
 import { EXAMPLE_DATA } from "@/common/constants/example-data";
-import { EnumDataType, IExampleData } from "@/common/types/example-data.type";
+import {
+  EnumDataType,
+  IExampleData,
+  IQue,
+} from "@/common/types/example-data.type";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const [data, setData] = useState<IExampleData[]>(EXAMPLE_DATA);
   const [selectedData, setSelectedData] = useState<IExampleData[]>([]);
+  const [que, setQue] = useState<IQue[]>([]);
 
   const handlerPopItem = useCallback((item: IExampleData) => {
     setData((prev) => [...prev, item]);
     setSelectedData((prev) => prev.filter(({ name }) => name !== item.name));
+    setQue((prev) => {
+      const findPrev = prev.find(({ name }) => name === item.name);
+      if (findPrev) {
+        clearTimeout(findPrev.timer);
+      }
+      return prev.filter(({ name }) => name !== item.name);
+    });
   }, []);
 
   const handlerClickItem = useCallback((item: IExampleData) => {
-    setData((prev) => prev.filter(({ name }) => name !== item.name));
-    setSelectedData((prev) => [...prev, item]);
-
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setSelectedData((prev) => prev.filter(({ name }) => name !== item.name));
-
       setData((prev) => {
         // NOTE: handler this when user click on the right column, the set state will not set duplicated items.
         const findExistingData = prev.find(({ name }) => name === item.name);
@@ -31,6 +39,16 @@ export default function Home() {
         return [...prev, item];
       });
     }, 5000);
+
+    setData((prev) => prev.filter(({ name }) => name !== item.name));
+    setSelectedData((prev) => [...prev, item]);
+    setQue((prev) => [
+      ...prev,
+      {
+        name: item.name,
+        timer: timer,
+      },
+    ]);
   }, []);
 
   return (

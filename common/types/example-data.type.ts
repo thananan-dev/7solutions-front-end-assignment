@@ -3,6 +3,11 @@ export interface IExampleData {
   name: string;
 }
 
+export interface IQue {
+  name: string;
+  timer: NodeJS.Timeout
+}
+
 export enum EnumDataType {
   VEGETBLE = 'Vegetable',
   FRUIT = 'Fruit'
