@@ -31,6 +31,15 @@ export default function Home() {
     const timer = setTimeout(() => {
       setSelectedData((prev) => prev.filter(({ name }) => name !== item.name));
       setData((prev) => [...prev, item]);
+      setQue((prev) => {
+        const findExistingQue = prev.find(({ name }) => name === item.name);
+        if (findExistingQue) {
+          clearTimeout(findExistingQue.timer);
+        }
+        return prev.filter(({ name }) => name !== item.name);
+      });
+
+      clearTimeout(timer)
     }, 5000);
 
     const addQue = {
